@@ -1,0 +1,192 @@
+/* Add these global improvements */
+html {
+    font-size: 16px;
+}
+
+img, svg, video {
+    max-width: 100%;
+    height: auto;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.form-group input,
+.form-group textarea {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Medium tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .sections {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+    
+    .section {
+        padding: 25px;
+    }
+    
+    .container {
+        width: 95%;
+    }
+    
+    .profile img {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* Small tablets and large phones */
+@media (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+    
+    .sections {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        padding: 30px 15px;
+        text-align: center;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .header p {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+
+    .profile img {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .section {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .skills-list {
+        justify-content: center;
+    }
+    
+    .skill-tag {
+        margin-bottom: 5px;
+    }
+    
+    .contact {
+        padding: 30px 20px;
+    }
+    
+    .contact-form {
+        padding: 20px;
+        margin-top: 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .submit-btn {
+        width: 100%;
+    }
+
+    .contact-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .social-section .contact-links a {
+        padding: 12px 15px;
+        margin-bottom: 5px;
+        display: block;
+    }
+    
+    .project-list li {
+        margin-bottom: 10px;
+    }
+    
+    .project-list a {
+        display: block;
+        padding: 8px;
+        background-color: #f4f7f6;
+        border-radius: 5px;
+    }
+    
+    /* Touch optimization */
+    .contact-links a, 
+    .submit-btn,
+    .project-list a {
+        min-height: 44px; /* Minimum touch target size */
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+    
+    .profile img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .header p {
+        font-size: 0.9rem;
+    }
+    
+    .section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .skill-tag {
+        font-size: 0.8rem;
+    }
+    
+    .contact h2 {
+        font-size: 1.7rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 12px;
+    }
+    
+    .section, .social-section, .contact {
+        margin-bottom: 15px;
+    }
+    
+    ul {
+        padding-left: 15px;
+    }
+}
+
+/* Extra large screens */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1300px;
+    }
+    
+    .profile img {
+        width: 220px;
+        height: 220px;
+    }
+}
