@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sandeep Kasetti — Electronics & Communication Engineer</title>
+<title>Sandeep Kasetti | Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -43,11 +43,6 @@
   --star-col:rgba(184,240,48,.9);
   --ring-col:rgba(184,240,48,.18);
   --scan-col:rgba(184,240,48,.14);
-  /* toggle */
-  --tkd:radial-gradient(circle at 35% 35%,#fff8c0,#f5c518 60%,#e09000);
-  --tkl:radial-gradient(circle at 35% 35%,#e8f4ff,#b8daff 60%,#6ab0f5);
-  --tgd:0 0 14px 4px rgba(245,197,24,.65),0 2px 6px rgba(0,0,0,.35);
-  --tgl:0 0 14px 4px rgba(106,176,245,.55),0 2px 6px rgba(0,0,0,.2);
 }
 
 /* ═══════════════════════════════════════════════
@@ -98,15 +93,13 @@ body::after{
 }
 
 /* ═══════════════════════════════════════════════
-   CUSTOM CURSOR — "accent dot" + "trailing ring"
-   Hidden on touch devices, shown on pointer:fine (mouse/trackpad)
+   CUSTOM CURSOR
 ═══════════════════════════════════════════════ */
 .cursor,.cursor-ring{display:none;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
 @media(pointer:fine){
   body{cursor:none;}
   .cursor,.cursor-ring{display:block;}
 }
-/* The small filled dot — named "cursor" id="cur" */
 .cursor{
   width:10px;height:10px;
   background:var(--accent);
@@ -115,7 +108,6 @@ body::after{
   transition:width .15s,height .15s,background .4s;
   mix-blend-mode:difference;
 }
-/* The large trailing ring — named "cursor-ring" id="curR" */
 .cursor-ring{
   width:34px;height:34px;
   border:1.5px solid rgba(184,240,48,.45);
@@ -124,12 +116,11 @@ body::after{
   transition:width .22s,height .22s,border-color .25s;
 }
 [data-theme="light"] .cursor-ring{border-color:rgba(58,138,0,.45);}
-/* Hover states — both expand */
 .cursor.hov{width:20px;height:20px;}
 .cursor-ring.hov{width:52px;height:52px;border-color:var(--accent);}
 
 /* ═══════════════════════════════════════════════
-   AURORA BEAMS — tall vertical glowing columns
+   AURORA BEAMS
 ═══════════════════════════════════════════════ */
 .aurora-wrap{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .aurora-beam{
@@ -147,7 +138,7 @@ body::after{
 }
 
 /* ═══════════════════════════════════════════════
-   FLOATING HEX RINGS — rotating square/diamond shapes
+   FLOATING HEX RINGS
 ═══════════════════════════════════════════════ */
 .hex-field{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .hex{
@@ -163,7 +154,7 @@ body::after{
 }
 
 /* ═══════════════════════════════════════════════
-   SHOOTING STARS — diagonal streaks of light
+   SHOOTING STARS
 ═══════════════════════════════════════════════ */
 .stars-wrap{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .sstar{
@@ -179,7 +170,7 @@ body::after{
 }
 
 /* ═══════════════════════════════════════════════
-   SCAN LINE — single line sweeping top→bottom
+   SCAN LINE
 ═══════════════════════════════════════════════ */
 .scanline{
   position:fixed;left:0;right:0;height:2px;
@@ -192,7 +183,7 @@ body::after{
 @keyframes scanMove{from{top:-2px}to{top:100vh}}
 
 /* ═══════════════════════════════════════════════
-   CORNER BRACKETS — accent lines in corners
+   CORNER BRACKETS
 ═══════════════════════════════════════════════ */
 .corner-tl,.corner-br{
   position:fixed;width:54px;height:54px;
@@ -206,56 +197,84 @@ body::after{
 .corner-br::after{bottom:-3px;right:-3px;}
 
 /* ═══════════════════════════════════════════════
-   THEME TOGGLE — Orbital Day/Night Switch
-   Stars in track (dark) → clouds/rays (light)
-   Golden moon knob (dark) → blue planet (light)
+   THEME TOGGLE — Moon / Sun style
 ═══════════════════════════════════════════════ */
-.theme-orb-wrap{position:relative;width:68px;height:34px;flex-shrink:0;}
-.theme-orb-track{
-  width:100%;height:100%;
+.theme-toggle-wrap{position:relative;flex-shrink:0;}
+.theme-toggle{
+  position:relative;
+  width:64px;
+  height:32px;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  padding:0;
+}
+/* Track */
+.toggle-track{
+  position:absolute;
+  inset:0;
   background:var(--surface2);
   border:1px solid var(--border2);
   border-radius:100px;
-  position:relative;overflow:hidden;
-  cursor:pointer;
+  overflow:hidden;
   transition:background .4s,border-color .4s;
 }
-/* star text (dark) / wave text (light) */
-.theme-orb-track::before{
-  content:'★ ✦ ★';
-  position:absolute;inset:0;display:flex;align-items:center;
-  font-size:.34rem;letter-spacing:3px;
-  color:rgba(255,255,255,.28);padding-left:7px;
-  pointer-events:none;transition:opacity .35s;
+/* Stars (dark mode) */
+.toggle-track::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(circle 1px at 20% 38%,rgba(255,255,255,.9),transparent 1px),
+    radial-gradient(circle 1px at 48% 62%,rgba(255,255,255,.7),transparent 1px),
+    radial-gradient(circle 1px at 70% 28%,rgba(255,255,255,.8),transparent 1px),
+    radial-gradient(circle 1px at 84% 68%,rgba(255,255,255,.6),transparent 1px);
+  opacity:1;
+  transition:opacity .4s;
 }
-[data-theme="light"] .theme-orb-track::before{
-  content:'~ ~ ~';
-  font-size:.5rem;letter-spacing:2.5px;
-  color:rgba(120,180,255,.5);
-  padding-left:38px;
+[data-theme="light"] .toggle-track::before{opacity:0;}
+/* Sun glow */
+.toggle-track::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 80% 50%,rgba(255,200,50,.35),transparent 65%);
+  opacity:0;
+  transition:opacity .4s;
 }
-/* the gliding knob */
-.theme-orb-knob{
-  position:absolute;top:3px;left:3px;
-  width:26px;height:26px;border-radius:50%;
-  background:var(--tkd);
-  box-shadow:var(--tgd);
-  transition:transform .42s cubic-bezier(.34,1.56,.64,1),background .42s,box-shadow .42s;
+[data-theme="light"] .toggle-track::after{opacity:1;}
+/* Orb */
+.toggle-orb{
+  position:absolute;
+  top:4px;
+  left:4px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
   pointer-events:none;
+  transition:transform .45s cubic-bezier(.34,1.56,.64,1),background .4s,box-shadow .4s;
 }
-[data-theme="light"] .theme-orb-knob{
-  transform:translateX(34px);
-  background:var(--tkl);
-  box-shadow:var(--tgl);
+/* Moon */
+[data-theme="dark"] .toggle-orb{
+  background:radial-gradient(circle at 35% 35%,#d0d8ff,#3b5bdb 55%,#1a2566);
+  box-shadow:0 0 10px rgba(80,110,255,.8),0 0 20px rgba(80,110,255,.3);
+  animation:moonGlow 3s ease-in-out infinite alternate;
 }
-/* crescent shadow on knob */
-.theme-orb-knob::after{
-  content:'';position:absolute;top:4px;right:3px;
-  width:16px;height:16px;border-radius:50%;
-  background:radial-gradient(circle,rgba(0,0,0,.22),transparent 70%);
-  transition:opacity .3s;
+/* Sun */
+[data-theme="light"] .toggle-orb{
+  background:radial-gradient(circle at 35% 35%,#fff8c0,#ffd43b 55%,#e67700);
+  box-shadow:0 0 12px rgba(255,200,50,1),0 0 28px rgba(255,160,0,.6);
+  transform:translateX(32px);
+  animation:sunPulse 2s ease-in-out infinite alternate;
 }
-[data-theme="light"] .theme-orb-knob::after{opacity:0;}
+@keyframes moonGlow{
+  from{box-shadow:0 0 8px rgba(80,110,255,.7),0 0 16px rgba(80,110,255,.2);}
+  to{box-shadow:0 0 14px rgba(80,110,255,1),0 0 28px rgba(80,110,255,.5);}
+}
+@keyframes sunPulse{
+  from{box-shadow:0 0 10px rgba(255,200,50,.9),0 0 20px rgba(255,160,0,.4);}
+  to{box-shadow:0 0 18px rgba(255,200,50,1),0 0 36px rgba(255,160,0,.7);}
+}
 
 /* ═══════════════════════════════════════════════
    NAV
@@ -276,7 +295,6 @@ nav{
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s;}
 .nav-links a:hover,.nav-links a.active{color:var(--accent);}
 .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
-/* "Contact Me" pill */
 .nav-contact{padding:.45rem 1.1rem !important;background:var(--accent-dim) !important;border:1px solid rgba(184,240,48,.22) !important;border-radius:100px !important;color:var(--accent) !important;}
 [data-theme="light"] .nav-contact{border-color:rgba(58,138,0,.22) !important;}
 .nav-contact::after{display:none !important;}
@@ -287,46 +305,46 @@ nav{
    HERO
 ═══════════════════════════════════════════════ */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 4rem 6rem;position:relative;overflow:hidden;}
-/* particle network canvas — fills entire hero */
 #heroCanvas{position:absolute;inset:0;z-index:0;pointer-events:none;}
-/* floating ambient orbs */
 .orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;animation:orbDrift 10s ease-in-out infinite alternate;}
 .orb1{width:800px;height:800px;background:radial-gradient(circle,var(--orb1),transparent 65%);top:-300px;right:-200px;}
 .orb2{width:550px;height:550px;background:radial-gradient(circle,var(--orb2),transparent 65%);bottom:0;left:-200px;animation-delay:-4s;}
 .orb3{width:350px;height:350px;background:radial-gradient(circle,var(--orb3),transparent 65%);top:35%;left:38%;animation-delay:-7s;}
 @keyframes orbDrift{from{transform:translate(0,0)scale(1)}to{transform:translate(30px,40px)scale(1.07)}}
-/* dotted grid overlay */
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 70%,black 10%,transparent 100%);}
 .hero-content{position:relative;z-index:2;}
-/* eyebrow label */
 .hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.24em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;opacity:0;animation:riseIn .7s ease .15s forwards;transition:color .4s;}
 .hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--accent);flex-shrink:0;transition:background .4s;}
-/* large name */
 .hero-name{font-family:'Syne',sans-serif;font-size:clamp(3.5rem,9.5vw,9.5rem);font-weight:800;line-height:.9;letter-spacing:-.04em;color:var(--text);position:relative;opacity:0;animation:riseIn .8s ease .3s forwards;will-change:transform;transition:color .4s;}
 .hero-name em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px var(--hero-em);transition:-webkit-text-stroke .4s;}
-/* expanding underline */
 .hero-underline{height:3px;width:0;background:linear-gradient(90deg,var(--accent),transparent);border-radius:2px;margin-top:.5rem;animation:expandLine 1s ease 1s forwards;transition:background .4s;}
 @keyframes expandLine{to{width:220px}}
-/* availability badge */
 .hero-badge{display:inline-flex;align-items:center;gap:.65rem;padding:.48rem 1.05rem;background:var(--accent-dim);border:1px solid rgba(184,240,48,.2);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent);letter-spacing:.07em;margin-top:1.75rem;width:fit-content;opacity:0;animation:riseIn .6s ease .8s forwards;transition:all .4s;}
 [data-theme="light"] .hero-badge{border-color:rgba(58,138,0,.2);}
 .hero-meta{display:flex;align-items:flex-end;justify-content:space-between;margin-top:1.2rem;gap:2rem;opacity:0;animation:riseIn .7s ease .95s forwards;}
 .hero-desc{font-size:1.05rem;color:var(--muted2);max-width:430px;line-height:1.78;font-weight:300;transition:color .4s;}
 .hero-cta{display:flex;gap:1rem;align-items:center;flex-shrink:0;}
-/* CTA buttons */
 .btn-main{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.75rem;background:var(--accent);color:#050608;font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;text-decoration:none;border-radius:6px;transition:all .22s;white-space:nowrap;position:relative;overflow:hidden;}
 .btn-main::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transform:translateX(-100%);transition:transform .5s;}
 .btn-main:hover::before{transform:translateX(100%);}
 .btn-main:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 10px 32px var(--glow);}
 .btn-ghost{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.75rem;background:transparent;color:var(--muted2);font-family:'Syne',sans-serif;font-weight:600;font-size:.85rem;text-decoration:none;border:1px solid var(--border2);border-radius:6px;transition:all .22s;white-space:nowrap;}
 .btn-ghost:hover{color:var(--text);transform:translateY(-2px);background:var(--surface);}
-/* scroll indicator */
-.hero-scroll{position:absolute;bottom:2rem;right:4rem;display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fadeInEl 1s ease 1.4s forwards;}
+
+/* ── SCROLL INDICATOR — centred ── */
+.hero-scroll{
+  position:absolute;
+  bottom:2rem;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  opacity:0;animation:fadeInEl 1s ease 1.4s forwards;
+}
 .scroll-line{width:1px;height:56px;background:linear-gradient(to bottom,transparent,var(--accent));animation:scrollPulse 2.5s ease infinite;transition:background .4s;}
 .scroll-txt{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;writing-mode:vertical-rl;}
 
 /* ═══════════════════════════════════════════════
-   STATS BAR — centred counters
+   STATS BAR
 ═══════════════════════════════════════════════ */
 .stats-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);transition:background .4s;}
 .stat-item{padding:2rem 1rem;border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;transition:background .2s;text-align:center;}
@@ -346,13 +364,12 @@ section{position:relative;z-index:1;}
 .sl{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
 
 /* ═══════════════════════════════════════════════
-   ABOUT — 1:1 circular photo
+   ABOUT — photo + floating cards (resized & repositioned)
 ═══════════════════════════════════════════════ */
 #about{background:var(--bg);transition:background .4s;}
 .about-grid{display:grid;grid-template-columns:280px 1fr;gap:6rem;align-items:center;}
 .photo-wrap{position:relative;width:280px;flex-shrink:0;}
 
-/* 1:1 circle photo box */
 .photo-box{
   width:100%;aspect-ratio:1/1;
   background:linear-gradient(145deg,var(--surface),var(--surface2));
@@ -368,49 +385,47 @@ section{position:relative;z-index:1;}
 .photo-box img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
 .photo-box::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 55% 25%,var(--accent-dim),transparent 55%);pointer-events:none;}
 
-/* pulsing rings behind circle */
 .photo-rings{position:absolute;inset:-28px;border-radius:50%;pointer-events:none;z-index:0;}
 .photo-rings::before,.photo-rings::after{content:'';position:absolute;inset:0;border-radius:50%;border:1px solid var(--ring-col);animation:ringPulse 3s ease-out infinite;}
 .photo-rings::after{animation-delay:1.5s;}
 @keyframes ringPulse{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.45);opacity:0}}
 
-/* name card — bottom-right of photo circle */
+/* ── Name card: smaller, pulled in so it doesn't cover photo ── */
 .photo-namecard{
   position:absolute;
-  bottom:16px;right:-56px;
+  bottom:22px;right:-34px;
   background:var(--surface);
   border:1px solid var(--accent);
-  border-radius:12px;
-  padding:.85rem 1.2rem;
-  box-shadow:0 0 28px var(--glow),var(--sh);
+  border-radius:10px;
+  padding:.6rem .9rem;
+  box-shadow:0 0 20px var(--glow),var(--sh);
   transition:all .4s;
   z-index:4;
   white-space:nowrap;
 }
-.photo-namecard-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;}
-.photo-namecard-name{font-family:'Syne',sans-serif;font-size:.92rem;font-weight:800;color:var(--accent);margin-top:.18rem;letter-spacing:-.02em;transition:color .4s;}
+.photo-namecard-label{font-family:'JetBrains Mono',monospace;font-size:.5rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;}
+.photo-namecard-name{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:800;color:var(--accent);margin-top:.14rem;letter-spacing:-.02em;transition:color .4s;}
 
-/* side pill — top-left of photo circle */
+/* ── Side pill: smaller, pulled in so it doesn't cover photo ── */
 .photo-pill{
   position:absolute;
-  top:20px;left:-72px;
+  top:22px;left:-48px;
   background:var(--surface);
   border:1px solid var(--border2);
   border-radius:100px;
-  padding:.48rem .9rem;
-  display:flex;align-items:center;gap:.5rem;
+  padding:.38rem .72rem;
+  display:flex;align-items:center;gap:.42rem;
   font-family:'JetBrains Mono',monospace;
-  font-size:.58rem;color:var(--muted2);
+  font-size:.52rem;color:var(--muted2);
   white-space:nowrap;
   box-shadow:var(--sh);
   transition:all .4s;
   z-index:4;
 }
-/* pulsing green dot */
-.pdot{width:7px;height:7px;background:var(--accent);border-radius:50%;flex-shrink:0;animation:pdotAnim 2s ease-in-out infinite;transition:background .4s;}
-@keyframes pdotAnim{0%,100%{box-shadow:0 0 0 0 var(--glow)}50%{box-shadow:0 0 0 6px rgba(184,240,48,0)}}
+.pdot{width:6px;height:6px;background:var(--accent);border-radius:50%;flex-shrink:0;animation:pdotAnim 2s ease-in-out infinite;transition:background .4s;}
+@keyframes pdotAnim{0%,100%{box-shadow:0 0 0 0 var(--glow)}50%{box-shadow:0 0 0 5px rgba(184,240,48,0)}}
 [data-theme="light"] .pdot{animation:pdotAnimL 2s ease-in-out infinite;}
-@keyframes pdotAnimL{0%,100%{box-shadow:0 0 0 0 rgba(58,138,0,.4)}50%{box-shadow:0 0 0 6px rgba(58,138,0,0)}}
+@keyframes pdotAnimL{0%,100%{box-shadow:0 0 0 0 rgba(58,138,0,.4)}50%{box-shadow:0 0 0 5px rgba(58,138,0,0)}}
 
 .about-body{padding-top:.25rem;}
 .about-text{font-size:1.05rem;line-height:1.84;color:var(--muted2);font-weight:300;margin-bottom:1.4rem;transition:color .4s;}
@@ -540,7 +555,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2.25
 @media(max-width:1024px){
   nav{padding:1.2rem 2.5rem;}
   .hero{padding:0 2.5rem 5rem;}
-  .hero-scroll{right:2.5rem;}
   .sw{padding:6rem 2.5rem;}
   .about-grid{grid-template-columns:240px 1fr;gap:5rem;}
   .photo-wrap{width:240px;}
@@ -553,8 +567,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2.25
 @media(max-width:768px){
   nav{padding:1rem 1.25rem;}
   .nav-links{display:none;}
-  /* show the toggle even on mobile */
-  .theme-orb-wrap{display:block;}
+  .theme-toggle-wrap{display:block;}
   .hero{padding:0 1.25rem 5rem;}
   .hero-name{font-size:clamp(2.8rem,14vw,5rem);}
   .hero-meta{flex-direction:column;align-items:flex-start;gap:1.75rem;}
@@ -567,13 +580,11 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2.25
   .stat-item:last-child{border-right:none;border-bottom:none;}
   .sw{padding:4.5rem 1.25rem;}
   .sh{margin-bottom:3rem;}
-  /* photo — stacks above text, centred */
   .about-grid{grid-template-columns:1fr;gap:4rem;}
   .photo-wrap{width:200px;margin:0 auto;}
-  /* reposition floating cards so they don't overflow */
-  .photo-namecard{right:-10px;bottom:10px;padding:.7rem 1rem;}
-  .photo-namecard-name{font-size:.82rem;}
-  .photo-pill{left:-10px;top:14px;font-size:.54rem;padding:.4rem .75rem;}
+  .photo-namecard{right:-8px;bottom:10px;padding:.55rem .8rem;}
+  .photo-namecard-name{font-size:.72rem;}
+  .photo-pill{left:-8px;top:14px;font-size:.48rem;padding:.35rem .65rem;}
   .skills-grid{grid-template-columns:1fr;}
   .proj-grid{grid-template-columns:1fr;}
   .exp-item{grid-template-columns:1fr;gap:.75rem;padding:1.75rem 1.25rem;}
@@ -582,7 +593,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2.25
   .frow{grid-template-columns:1fr;}
   footer{flex-direction:column;gap:1.25rem;text-align:center;padding:1.75rem 1.25rem;}
   .corner-tl,.corner-br{display:none;}
-  /* hide aurora/hex/stars on very small screens for perf */
   .aurora-wrap,.hex-field,.stars-wrap{display:none;}
 }
 
@@ -596,28 +606,22 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2.25
   .stat-num{font-size:2.2rem;}
   .st{font-size:1.75rem;}
   .photo-wrap{width:170px;}
-  .photo-namecard{right:-6px;bottom:8px;}
-  .photo-pill{left:-6px;top:10px;}
+  .photo-namecard{right:-5px;bottom:8px;}
+  .photo-pill{left:-5px;top:10px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ══ CUSTOM CURSOR ══
-     .cursor  (#cur)  — small filled accent dot that follows mouse exactly
-     .cursor-ring (#curR) — larger hollow ring that trails behind with lag
-     Both hidden on touch/mobile via @media(pointer:fine)
--->
 <div class="cursor" id="cur"></div>
 <div class="cursor-ring" id="curR"></div>
 
-<!-- ══ BACKGROUND ANIMATIONS (all fixed, behind content) ══ -->
-<div class="aurora-wrap"  id="auroraWrap"></div>   <!-- aurora beams  -->
-<div class="hex-field"    id="hexField"></div>      <!-- hex rings     -->
-<div class="stars-wrap"   id="starsWrap"></div>     <!-- shooting stars-->
-<div class="scanline"></div>                        <!-- scan line     -->
-<div class="corner-tl"></div>                       <!-- corner bracket top-left  -->
-<div class="corner-br"></div>                       <!-- corner bracket bottom-right -->
+<div class="aurora-wrap"  id="auroraWrap"></div>
+<div class="hex-field"    id="hexField"></div>
+<div class="stars-wrap"   id="starsWrap"></div>
+<div class="scanline"></div>
+<div class="corner-tl"></div>
+<div class="corner-br"></div>
 
 <!-- ══ NAV ══ -->
 <nav>
@@ -630,10 +634,11 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2.25
       <li><a href="#experience">Experience</a></li>
       <li><a href="#contact" class="nav-contact">Contact Me</a></li>
     </ul>
-    <!-- Orbital Day/Night Toggle -->
-    <div class="theme-orb-wrap">
-      <button class="theme-orb-track" id="themeBtn" aria-label="Toggle light/dark theme">
-        <span class="theme-orb-knob"></span>
+    <!-- Moon / Sun Toggle -->
+    <div class="theme-toggle-wrap">
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle light/dark theme">
+        <div class="toggle-track"></div>
+        <div class="toggle-orb"></div>
       </button>
     </div>
   </div>
@@ -641,11 +646,11 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2.25
 
 <!-- ══ HERO ══ -->
 <section id="home" class="hero">
-  <canvas id="heroCanvas"></canvas>       <!-- particle network   -->
-  <div class="hero-grid"></div>           <!-- dot grid overlay   -->
-  <div class="orb orb1"></div>            <!-- ambient green orb  -->
-  <div class="orb orb2"></div>            <!-- ambient cyan orb   -->
-  <div class="orb orb3"></div>            <!-- ambient purple orb -->
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
 
   <div class="hero-content">
     <div class="hero-eyebrow">Electronics &amp; Communication Engineer</div>
@@ -682,16 +687,12 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2.25
     <div class="about-grid">
 
       <div class="photo-wrap rev">
-        <!-- Pulsing rings sit behind the photo circle -->
         <div class="photo-rings"></div>
-        <!-- ▼ PROFILE PHOTO: replace the div below with the img tag when ready -->
         <img src="Sandeep_Profile.jpg" alt="Sandeep Kasetti" class="photo-box">
-        <!-- Name card — bottom-right corner of circle -->
         <div class="photo-namecard">
           <div class="photo-namecard-label">Hello, I'm</div>
           <div class="photo-namecard-name">Sandeep Kasetti</div>
         </div>
-        <!-- Floating pill — top-left corner of circle -->
         <div class="photo-pill">
           <span class="pdot"></span>
           <span>ECE · Cybersecurity · Automation</span>
@@ -917,8 +918,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2.25
 <script>
 /* ═══════════════════════════════════════════════════════════
    1. THEME TOGGLE
-   — On first visit: knob bounces right→left as a hint
-   — On click: toggles dark/light, saves to localStorage
 ═══════════════════════════════════════════════════════════ */
 const html     = document.documentElement;
 const themeBtn = document.getElementById('themeBtn');
@@ -927,13 +926,12 @@ const savedTheme = localStorage.getItem('sk-theme');
 if(savedTheme){
   html.setAttribute('data-theme', savedTheme);
 } else {
-  // First visit: introductory bounce on the knob after 1.4s
   setTimeout(function(){
-    const knob = document.querySelector('.theme-orb-knob');
-    if(!knob) return;
-    knob.style.transition = 'transform .45s cubic-bezier(.34,1.56,.64,1)';
-    knob.style.transform  = 'translateX(34px)';
-    setTimeout(function(){ knob.style.transform = 'translateX(0)'; }, 620);
+    const orb = document.querySelector('.toggle-orb');
+    if(!orb) return;
+    orb.style.transition = 'transform .45s cubic-bezier(.34,1.56,.64,1)';
+    orb.style.transform  = 'translateX(32px)';
+    setTimeout(function(){ orb.style.transform = 'translateX(0)'; }, 620);
   }, 1400);
 }
 
@@ -945,8 +943,6 @@ themeBtn.addEventListener('click', function(){
 
 /* ═══════════════════════════════════════════════════════════
    2. HERO PARTICLE NETWORK CANVAS
-   — Dots drift slowly and connect with lines when near
-   — Mouse proximity repels nearby particles dynamically
 ═══════════════════════════════════════════════════════════ */
 (function(){
   var canvas = document.getElementById('heroCanvas');
@@ -1038,7 +1034,7 @@ themeBtn.addEventListener('click', function(){
 })();
 
 /* ═══════════════════════════════════════════════════════════
-   3. AURORA BEAMS — tall vertical glowing columns
+   3. AURORA BEAMS
 ═══════════════════════════════════════════════════════════ */
 (function(){
   var wrap   = document.getElementById('auroraWrap');
@@ -1064,7 +1060,7 @@ themeBtn.addEventListener('click', function(){
 })();
 
 /* ═══════════════════════════════════════════════════════════
-   4. FLOATING HEX RINGS — rotating geometric shapes
+   4. FLOATING HEX RINGS
 ═══════════════════════════════════════════════════════════ */
 (function(){
   var field = document.getElementById('hexField');
@@ -1084,7 +1080,7 @@ themeBtn.addEventListener('click', function(){
 })();
 
 /* ═══════════════════════════════════════════════════════════
-   5. SHOOTING STARS — diagonal light streaks
+   5. SHOOTING STARS
 ═══════════════════════════════════════════════════════════ */
 (function(){
   var wrap = document.getElementById('starsWrap');
@@ -1103,9 +1099,7 @@ themeBtn.addEventListener('click', function(){
 })();
 
 /* ═══════════════════════════════════════════════════════════
-   6. CUSTOM CURSOR (desktop / pointer:fine only)
-   "cur"  = small filled accent dot — follows mouse exactly
-   "curR" = larger trailing ring — lags behind with lerp
+   6. CUSTOM CURSOR
 ═══════════════════════════════════════════════════════════ */
 if(window.matchMedia('(pointer:fine)').matches){
   var cur  = document.getElementById('cur');
@@ -1133,7 +1127,7 @@ if(window.matchMedia('(pointer:fine)').matches){
 }
 
 /* ═══════════════════════════════════════════════════════════
-   7. SCROLL REVEAL — elements fade+rise when entering viewport
+   7. SCROLL REVEAL
 ═══════════════════════════════════════════════════════════ */
 var obs = new IntersectionObserver(function(entries){
   entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); } });
@@ -1141,7 +1135,7 @@ var obs = new IntersectionObserver(function(entries){
 document.querySelectorAll('.rev').forEach(function(el){ obs.observe(el); });
 
 /* ═══════════════════════════════════════════════════════════
-   8. SMOOTH SCROLL — intercept anchor clicks
+   8. SMOOTH SCROLL
 ═══════════════════════════════════════════════════════════ */
 document.querySelectorAll('a[href^="#"]').forEach(function(a){
   a.addEventListener('click', function(e){
@@ -1152,7 +1146,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
 });
 
 /* ═══════════════════════════════════════════════════════════
-   9. HERO PARALLAX — name drifts slightly with mouse
+   9. HERO PARALLAX
 ═══════════════════════════════════════════════════════════ */
 var hn = document.querySelector('.hero-name');
 document.addEventListener('mousemove', function(e){
@@ -1163,7 +1157,7 @@ document.addEventListener('mousemove', function(e){
 });
 
 /* ═══════════════════════════════════════════════════════════
-   10. ACTIVE NAV HIGHLIGHT — highlights link of visible section
+   10. ACTIVE NAV HIGHLIGHT
 ═══════════════════════════════════════════════════════════ */
 var sects = document.querySelectorAll('section[id]');
 var nls   = document.querySelectorAll('.nav-links a');
@@ -1178,7 +1172,7 @@ window.addEventListener('scroll', function(){
 }, {passive:true});
 
 /* ═══════════════════════════════════════════════════════════
-   11. STAT COUNTER ANIMATION — counts up when scrolled into view
+   11. STAT COUNTER ANIMATION
 ═══════════════════════════════════════════════════════════ */
 function animateCounter(el, target, suffix){
   var startTs = null;
