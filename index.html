@@ -813,4 +813,14 @@ var statObs=new IntersectionObserver(function(entries){entries.forEach(function(
     const scrollTop = window.scrollY||document.documentElement.scrollTop;
     const docHeight = document.documentElement.scrollHeight-window.innerHeight;
     const progress = docHeight>0?scrollTop/docHeight:0;
-    fi
+    const percent = Math.round(progress*100);
+    fill.style.height = percent+"%";
+  }
+  window.addEventListener("scroll",updateScroll,{passive:true});
+  window.addEventListener("resize",updateScroll,{passive:true});
+  updateScroll();
+})();
+</script>
+
+</body>
+</html>
